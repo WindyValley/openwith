@@ -1,0 +1,8 @@
+[package]
+name = "openwith"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+winreg = "0.55"
+windows = { version = "0.61", features = ["Win32_UI_WindowsAndMessaging"] }
