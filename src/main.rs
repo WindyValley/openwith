@@ -6,6 +6,8 @@ use windows::{
   Win32::UI::WindowsAndMessaging::*
 };
 use winreg::RegKey;
+mod config;
+use crate::config::datadef::{Config, OpenPosition};
 
 fn main() -> Result<()> {
     let key = Path::new("Software")
@@ -28,35 +30,39 @@ fn main() -> Result<()> {
             hkcu.delete_subkey_all(&key).unwrap();
         } else if arg == "--open" {
             let url = args.next().unwrap();
-            let message = format!("Opening URL: {}", url);
+
+            // show_message(&url, "Open With");
+
             // Here you would add the code to open the URL with your application
-            // For demonstration, we will just print the URL
-            // and show a message box
-            // Convert the URL to a wide string
-            let wide_message: Vec<u16> = message.encode_utf16().chain(std::iter::once(0)).collect();
-            unsafe {
-                MessageBoxW(
-                    None,
-                    PCWSTR(wide_message.as_ptr()),
-                    w!("Open with"),
-                    MB_OK,
-                );
+            let open_position = OpenPosition::parse(&url).unwrap();
+            let home_dir = dirs::home_dir().expect("Cannot determine home directory");
+            let config_path = home_dir.join(".config").join("openwith").join("config.json");
+            let config_path = config_path.to_str().unwrap();
+            // Assuming you have a way to get the appropriate OpenHandler
+            let config = Config::from_json_file(config_path).unwrap();
+            if let Some(handler) = config.open_handlers.iter().find(|h| h.id == config.default_open_handler.as_deref().unwrap_or("") || config.default_open_handler.is_none()) {
+                handler.do_open(&open_position);
+            } else {
+                show_message("No valid open handler found.", "Error");
             }
-            // Here you would add the code to open the URL with your application
         } else {
             let message = format!("Unknown argument: {}", arg);
-            // Convert the message to a wide string
-            let wide_message: Vec<u16> = message.encode_utf16().chain(std::iter::once(0)).collect();
-            unsafe {
-                MessageBoxW(
-                    None,
-                    PCWSTR(wide_message.as_ptr()),
-                    w!("Error"),
-                    MB_OK,
-                );
-            }
+            show_message(&message, "Error");
         }
     }
 
     Ok(())
+}
+
+fn show_message(message: &str, title: &str) {
+    let wide_message: Vec<u16> = message.encode_utf16().chain(std::iter::once(0)).collect();
+    let wide_title: Vec<u16> = title.encode_utf16().chain(std::iter::once(0)).collect();
+    unsafe {
+        MessageBoxW(
+            None,
+            PCWSTR(wide_message.as_ptr()),
+            PCWSTR(wide_title.as_ptr()),
+            MB_OK,
+        );
+    }
 }

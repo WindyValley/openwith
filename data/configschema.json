@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Configuration Schema",
+  "type": "object",
+  "definitions": {
+    "open_handler": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the open handler."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name for the open handler."
+        },
+        "program": {
+          "type": "string",
+          "description": "The name or path of the program to run."
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments to pass to the program."
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Environment variables to set."
+        },
+        "cwd": {
+          "type": "string",
+          "description": "Working directory to run the program in."
+        }
+      },
+      "required": ["id", "display_name", "program", "args"],
+      "additionalProperties": false
+    } 
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Path to the JSON schema."
+    },
+    "open_handlers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/open_handler"
+      },
+      "description": "List of open handlers."
+    },
+    "default_open_handler": {
+      "type": "string",
+      "description": "Default open-handler's id."
+    }
+  },
+  "required": ["open_handlers"],
+  "additionalProperties": false
+}

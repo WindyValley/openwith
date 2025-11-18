@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "name": "Debug executable 'openwith'",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": [
+          "run",
+          "--bin=openwith"
+        ]
+      },
+      "args": [
+        "--open",
+        "openwith://${workspaceFolder}/src/main.rs?line=12&column=15"
+      ],
+      "cwd": "${workspaceFolder}/data"
+    }
+  ]
+}

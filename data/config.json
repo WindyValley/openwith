@@ -1,0 +1,45 @@
+{
+  "$schema": "./configschema.json",
+  "open_handlers": [
+    {
+      "id": "{97F0C590-66D6-4F51-BE4A-3BB988A0A9FC}",
+      "display_name": "Visual Studio Code",
+      "program": "D:\\VSCode\\Code.exe",
+      "args": [
+        "-g",
+        "{file}:{line}:{column}"
+      ]
+    },
+    {
+      "id": "{D4C9F5E2-3A6B-4F2D-8F1E-2C3B4A5D6E7F}",
+      "display_name": "GVim",
+      "program": "gvim",
+      "args": [
+        "+{line}",
+        "{file}"
+      ]
+    },
+    {
+      "id": "{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}",
+      "display_name": "Notepad++",
+      "program": "H:\\Program Files\\Notepad++\\notepad++.exe",
+      "args": [
+        "-n{line}",
+        "-c{column}",
+        "{file}"
+      ]
+    },
+    {
+      "id": "{12345678-90AB-CDEF-1234-567890ABCDEF}",
+      "display_name": "Visual Studio",
+      "program": "D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe",
+      "args": [
+        "/Edit",
+        "{file}",
+        "/Command",
+        "Edit.GoTo {line}"
+      ]
+    }
+  ],
+  "default_open_handler": "{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}"
+}
