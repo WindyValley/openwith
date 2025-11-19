@@ -1,3 +1,18 @@
 {
-  "editor.detectIndentation": true
+  "editor.detectIndentation": true,
+  "cSpell.words": [
+    "openwith",
+    "datadef",
+    "winreg",
+    "hkcu",
+    "subkey",
+    "PCWSTR",
+    "urlhandler",
+    "urlregister",
+    "rustc",
+    "MANIFESTINPUT",
+    "configschema",
+    "gvim",
+    "devenv",
+  ]
 }

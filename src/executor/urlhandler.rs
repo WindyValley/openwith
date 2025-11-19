@@ -1,4 +1,4 @@
-use crate::config::datadef::{OpenHandler, OpenPosition};
+pub use crate::config::datadef::{OpenHandler, OpenPosition};
 
 impl OpenHandler {
     pub fn do_open(&self, pos: &OpenPosition) {

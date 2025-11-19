@@ -22,7 +22,7 @@
     {
       "id": "{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}",
       "display_name": "Notepad++",
-      "program": "H:\\Program Files\\Notepad++\\notepad++.exe",
+      "program": "C:\\Program Files\\Notepad++\\notepad++.exe",
       "args": [
         "-n{line}",
         "-c{column}",
